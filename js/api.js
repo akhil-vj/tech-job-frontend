@@ -1,5 +1,5 @@
 // Single place to configure the backend address.
-const API_BASE_URL = "http://localhost:8000/api";
+const API_BASE_URL = "https://tech-job-backend.onrender.com/api";
 
 // fetch wrapper: sends the session cookie, throws Error(message) on failure, redirects to login on 401 for protected pages.
 async function api(path, opts = {}) {
