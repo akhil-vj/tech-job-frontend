@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Admin Dashboard - TechJobs</title>
+</head>
+<body data-protected="1">
+  <nav>
+    <a href="index.html" class="brand">TechJobs. <span style="font-size:0.7rem; font-weight:400; opacity:0.6; margin-left:4px;">ADMIN</span></a>
+    <div class="nav-links">
+      <span id="welcome" style="font-weight:500; font-size:0.875rem;">Welcome, Admin</span>
+      <button class="btn btn-outline" id="logout" style="padding:0.375rem 0.75rem;">Sign out</button>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- Tab Navigation -->
+    <div class="tabs">
+      <button class="tab active" data-tab="vacancies">Vacancies</button>
+      <button class="tab" data-tab="applications">Applications</button>
+      <button class="tab" data-tab="users">Users</button>
+    </div>
+
+    <!-- Tab: Vacancies -->
+    <div id="tab-vacancies" class="tab-content active">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <h2 style="margin:0;">Job Vacancies</h2>
+        <div style="display:flex; gap:0.5rem;">
+          <button class="btn" id="syncBtn">Sync from API</button>
+          <button class="btn btn-outline" id="addJobBtn">+ Add Manual Job</button>
+        </div>
+      </div>
+      <p id="syncStatus" style="margin:0 0 1rem; font-size:0.875rem; color:var(--text-muted);"></p>
+      <div id="jobsList"></div>
+    </div>
+
+    <!-- Tab: Applications -->
+    <div id="tab-applications" class="tab-content">
+      <h2>All Applications</h2>
+      <div id="appsList"></div>
+    </div>
+
+    <!-- Tab: Users -->
+    <div id="tab-users" class="tab-content">
+      <h2>Registered Users</h2>
+      <div id="usersList"></div>
+    </div>
+
+  </div>
+
+  <!-- Edit Job Modal -->
+  <div class="modal-overlay" id="jobModal" style="display:none;">
+    <div class="modal">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <h3 id="modalTitle" style="margin:0;">Add Job</h3>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <form id="jobForm">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div class="input-group">
+            <label for="jTitle">Job Title</label>
+            <input id="jTitle" name="title" type="text" required>
+          </div>
+          <div class="input-group">
+            <label for="jCompany">Company</label>
+            <input id="jCompany" name="company" type="text" required>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+          <div class="input-group">
+            <label for="jLocation">Location</label>
+            <input id="jLocation" name="location" type="text">
+          </div>
+          <div class="input-group">
+            <label for="jSalary">Salary</label>
+            <input id="jSalary" name="salary" type="text">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="jSkills">Required Skills (comma separated)</label>
+          <input id="jSkills" name="requiredSkills" type="text" placeholder="Java, Spring Boot, SQL">
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;">
+          <div class="input-group">
+            <label for="jExp">Min. Experience (yrs)</label>
+            <input id="jExp" name="requiredExperience" type="number" min="0" value="0">
+          </div>
+          <div class="input-group">
+            <label for="jType">Employment Type</label>
+            <input id="jType" name="employmentType" type="text" placeholder="full_time">
+          </div>
+          <div class="input-group">
+            <label for="jUrl">Application URL</label>
+            <input id="jUrl" name="applicationUrl" type="text">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="jDesc">Description</label>
+          <textarea id="jDesc" name="description" rows="3" style="width:100%; padding:0.625rem 0.875rem; border:1px solid var(--border); border-radius:var(--radius); font-family:var(--font); font-size:0.875rem; resize:vertical;"></textarea>
+        </div>
+        <input type="hidden" id="jId" name="id">
+        <button class="btn" type="submit" id="jobFormBtn">Save Job</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

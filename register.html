@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Sign up - TechJobs</title>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="brand">TechJobs.</a>
+    <div class="nav-links">
+      <span style="color: var(--text-muted); font-size: 0.875rem;">Already have an account?</span>
+      <a href="login.html">Sign in</a>
+    </div>
+  </nav>
+
+  <div class="auth-container" style="max-width: 540px;">
+    <div class="text-center" style="margin-bottom: 2rem;">
+      <h2>Create your profile</h2>
+      <p style="margin:0;">Join us to get personalized job recommendations.</p>
+    </div>
+    
+    <form id="regForm">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="input-group">
+          <label for="name">Full Name</label>
+          <input id="name" name="name" type="text" placeholder="John Doe" required>
+        </div>
+        
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="john@example.com" required>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" minlength="6" placeholder="At least 6 characters" required>
+      </div>
+      
+      <div style="border-top: 1px solid var(--border); margin: 0.5rem 0; padding-top:1rem; font-weight:600;">Profile Details</div>
+      
+      <!-- Manual Profile is always shown as priority -->
+      <div id="manualProfileSection" style="padding:1.5rem; border:1px solid var(--border); border-radius:var(--radius); margin-bottom:1rem; background: var(--bg-secondary);">
+        <div class="input-group">
+          <label for="jobTitle">Target Role</label>
+          <input id="jobTitle" name="jobTitle" type="text" placeholder="e.g. Frontend Engineer" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 1rem;">
+          <div class="input-group">
+            <label for="experienceYears">Experience (Years)</label>
+            <input id="experienceYears" name="experienceYears" type="number" min="0" max="50" value="0" required>
+          </div>
+          
+          <div class="input-group">
+            <label for="skills">Key Skills (Comma separated)</label>
+            <input id="skills" name="skills" type="text" placeholder="React, Node.js, TypeScript" required>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="input-group">
+            <label for="qualification">Degree / Qualification</label>
+            <input id="qualification" name="qualification" type="text" placeholder="BSc Computer Science">
+          </div>
+          
+          <div class="input-group">
+            <label for="preferredLocation">Preferred Location</label>
+            <input id="preferredLocation" name="preferredLocation" type="text" placeholder="New York, NY">
+          </div>
+        </div>
+      </div>
+      
+      <div class="checkbox-group" style="margin-bottom: 1rem;">
+        <input id="hasCv" name="hasCv" type="checkbox" onchange="toggleCvMode()">
+        <label for="hasCv" style="font-weight:600;">I already have a CV document to upload</label>
+      </div>
+
+      <div id="cvUploadSection" style="display:none; padding:1.5rem; border:1px dashed var(--primary); border-radius:var(--radius); margin-bottom:1rem; background: var(--bg-secondary);">
+        <div class="input-group" style="margin-bottom:0;">
+          <label for="cvFile">Select Resume File (PDF, DOCX)</label>
+          <input type="file" id="cvFile" name="cvFile" accept=".pdf,.doc,.docx" style="padding: 0.5rem; background:var(--bg); border: 1px solid var(--border); border-radius: 4px; width: 100%;">
+        </div>
+      </div>
+
+      <div class="checkbox-group" style="margin-top: 0.5rem;">
+        <input id="remote" name="remote" type="checkbox">
+        <label for="remote">I am open to remote work</label>
+      </div>
+
+      <button class="btn" type="submit" style="margin-top:1rem;">Create Account</button>
+      <div id="msg" style="display:none;"></div>
+    </form>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    const msgDiv = document.getElementById("msg");
+    const observer = new MutationObserver(() => {
+      if(msgDiv.textContent.trim() !== '') msgDiv.style.display = 'block';
+    });
+    observer.observe(msgDiv, {childList: true, characterData: true, subtree: true});
+
+    function toggleCvMode() {
+      const isChecked = document.getElementById('hasCv').checked;
+      const sec = document.getElementById("cvUploadSection");
+      const fileInput = document.getElementById("cvFile");
+      if (isChecked) {
+        sec.style.display = "block";
+        fileInput.required = true;
+      } else {
+        sec.style.display = "none";
+        fileInput.required = false;
+        fileInput.value = "";
+      }
+    }
+  </script>
+</body>
+</html>
