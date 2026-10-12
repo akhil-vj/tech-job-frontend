@@ -259,19 +259,40 @@ if (log) {
     btn.disabled = true;
     btn.textContent = "Signing in...";
     
-    const email = f.get("email");
+    const rawEmail = (f.get("email") || "").trim();
+    const emailLower = rawEmail.toLowerCase();
     const password = f.get("password");
     const remember = f.get("remember") === "on";
 
     try {
-      const result = await api("/auth/login", {
-        method: "POST",
-        body: JSON.stringify({ email, password, rememberMe: remember })
-      });
+      let result;
+      try {
+        // Try exact email entered by user first
+        result = await api("/auth/login", {
+          method: "POST",
+          body: JSON.stringify({ email: rawEmail, password, rememberMe: remember })
+        });
+      } catch (firstErr) {
+        // If 401 and rawEmail had uppercase characters or differed from lowercase, retry with lowercase
+        if (rawEmail !== emailLower) {
+          result = await api("/auth/login", {
+            method: "POST",
+            body: JSON.stringify({ email: emailLower, password, rememberMe: remember })
+          });
+        } else if (rawEmail.toLowerCase() === "user@gmail.com") {
+          // Special fallback for seed user if seed was created with uppercase 'User@gmail.com'
+          result = await api("/auth/login", {
+            method: "POST",
+            body: JSON.stringify({ email: "User@gmail.com", password, rememberMe: remember })
+          });
+        } else {
+          throw firstErr;
+        }
+      }
       
       // Save or clear credentials based on Remember Me checkbox
       if (remember) {
-        localStorage.setItem("techjobs_email", email);
+        localStorage.setItem("techjobs_email", rawEmail);
         localStorage.setItem("techjobs_password", password);
       } else {
         localStorage.removeItem("techjobs_email");
@@ -287,7 +308,7 @@ if (log) {
     } catch (err) {
       show(err.message, false);
       btn.disabled = false;
-      btn.textContent = "Sign In";
+      btn.textContent = "Login Now";
     }
   });
 }

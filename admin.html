@@ -3,111 +3,691 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="css/style.css">
-  <title>Admin Dashboard - TechJobs</title>
+  <title>Admin Dashboard – TechJobs.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --brand: #16a34a; --brand-dark: #15803d; --brand-light: #f0fdf4; --brand-border: #bbf7d0;
+      --dark: #0f172a; --dark2: #1e293b; --dark3: #334155;
+      --text: #1e293b; --muted: #64748b; --muted2: #94a3b8;
+      --bg: #f8fafc; --white: #ffffff; --border: #e2e8f0; --border2: #f1f5f9;
+      --danger: #ef4444; --danger-light: #fef2f2; --danger-border: #fecaca;
+      --warning: #f59e0b; --warning-light: #fffbeb;
+      --blue: #3b82f6; --blue-light: #eff6ff; --blue-border: #bfdbfe;
+      --radius: 10px; --radius-lg: 14px;
+      --font: 'Inter', system-ui, sans-serif;
+      --sidebar-w: 230px;
+      --nav-h: 58px;
+    }
+    html { height: 100%; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); height: 100%; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── TOP NAV ── */
+    .top-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h);
+      background: var(--white); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 1.5rem 0 0;
+    }
+    .nav-left {
+      width: var(--sidebar-w); flex-shrink: 0;
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0 1.25rem;
+      border-right: 1px solid var(--border);
+      height: 100%;
+    }
+    .nav-brand { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.03em; color: var(--dark); }
+    .nav-brand span { color: var(--brand); }
+    .nav-admin-badge {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--brand); background: var(--brand-light); border: 1px solid var(--brand-border);
+      padding: 0.2rem 0.55rem; border-radius: 999px;
+    }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .nav-welcome { font-size: 0.85rem; font-weight: 500; color: var(--muted); }
+    .nav-welcome strong { color: var(--text); font-weight: 600; }
+    .btn-logout {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 600; color: var(--danger);
+      background: var(--danger-light); border: 1px solid var(--danger-border);
+      padding: 0.4rem 0.9rem; border-radius: 7px; cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-logout:hover { background: #fecaca; }
+
+    /* ── LAYOUT ── */
+    .layout { display: flex; margin-top: var(--nav-h); min-height: calc(100vh - var(--nav-h)); }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      position: fixed; top: var(--nav-h); left: 0; bottom: 0;
+      width: var(--sidebar-w); background: var(--white);
+      border-right: 1px solid var(--border);
+      padding: 1.25rem 0.75rem;
+      display: flex; flex-direction: column; gap: 0.25rem;
+      overflow-y: auto;
+    }
+    .sidebar-label {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted2);
+      padding: 0.6rem 0.6rem 0.35rem;
+    }
+    .sidebar-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.6rem 0.85rem; border-radius: 8px; cursor: pointer;
+      font-size: 0.875rem; font-weight: 500; color: var(--muted);
+      transition: all 0.15s; border: none; background: none; width: 100%; text-align: left;
+    }
+    .sidebar-item:hover { background: var(--bg); color: var(--text); }
+    .sidebar-item.active { background: var(--brand-light); color: var(--brand-dark); font-weight: 600; }
+    .sidebar-item.active svg { color: var(--brand); }
+    .sidebar-item svg { flex-shrink: 0; opacity: 0.7; }
+    .sidebar-item.active svg { opacity: 1; }
+    .sidebar-count {
+      margin-left: auto; font-size: 0.7rem; font-weight: 700;
+      background: var(--border2); color: var(--muted);
+      padding: 0.1rem 0.5rem; border-radius: 999px; min-width: 22px; text-align: center;
+    }
+    .sidebar-item.active .sidebar-count { background: var(--brand-border); color: var(--brand-dark); }
+
+    /* ── MAIN CONTENT ── */
+    .main { margin-left: var(--sidebar-w); flex: 1; padding: 2rem; max-width: 1200px; }
+
+    /* ── PAGE HEADER ── */
+    .page-header { margin-bottom: 1.75rem; }
+    .page-header h1 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.025em; color: var(--dark); margin-bottom: 0.25rem; }
+    .page-header p  { font-size: 0.875rem; color: var(--muted); }
+
+    /* ── STAT CARDS ── */
+    .stat-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.25rem 1.5rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .stat-card-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .stat-card-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .stat-card-num  { font-size: 1.75rem; font-weight: 800; color: var(--dark); letter-spacing: -0.03em; line-height: 1; }
+    .stat-card-label{ font-size: 0.8rem; color: var(--muted); font-weight: 500; }
+
+    /* ── TAB CONTENT ── */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── SECTION HEADER ── */
+    .sec-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 1.25rem;
+    }
+    .sec-header h2 { font-size: 1rem; font-weight: 700; color: var(--dark); }
+    .sec-header-btns { display: flex; gap: 0.5rem; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--font); font-size: 0.825rem; font-weight: 600; cursor: pointer;
+      padding: 0.5rem 1rem; border-radius: 8px; border: none;
+      transition: all 0.15s;
+    }
+    .btn-primary  { background: var(--brand);   color: #fff; }
+    .btn-primary:hover { background: var(--brand-dark); }
+    .btn-outline  { background: var(--white); color: var(--text); border: 1px solid var(--border); }
+    .btn-outline:hover { background: var(--bg); }
+    .btn-danger-soft { background: var(--danger-light); color: var(--danger); border: 1px solid var(--danger-border); }
+    .btn-danger-soft:hover { background: #fecaca; }
+    .btn-edit { background: var(--blue-light); color: var(--blue); border: 1px solid var(--blue-border); font-size: 0.75rem; padding: 0.3rem 0.7rem; }
+    .btn-edit:hover { background: #bfdbfe; }
+    .btn-del  { background: var(--danger-light); color: var(--danger); border: 1px solid var(--danger-border); font-size: 0.75rem; padding: 0.3rem 0.7rem; }
+    .btn-del:hover  { background: #fecaca; }
+    .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+    /* ── TABLE ── */
+    .table-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+    thead { background: var(--bg); }
+    th {
+      text-align: left; padding: 0.75rem 1rem;
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+    td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--border2); vertical-align: middle; color: var(--text); }
+    tr:last-child td { border-bottom: none; }
+    tbody tr { transition: background 0.1s; }
+    tbody tr:hover { background: #fafbfc; }
+    .td-truncate { max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: inline-block; vertical-align: middle; }
+
+    /* ── BADGES ── */
+    .badge {
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      padding: 0.2rem 0.6rem; border-radius: 999px;
+    }
+    .badge-green  { background: var(--brand-light); color: var(--brand-dark); border: 1px solid var(--brand-border); }
+    .badge-blue   { background: var(--blue-light);  color: var(--blue);       border: 1px solid var(--blue-border); }
+    .badge-gray   { background: var(--border2);     color: var(--muted);      border: 1px solid var(--border); }
+    .badge-amber  { background: var(--warning-light); color: #92400e;         border: 1px solid #fcd34d; }
+
+    /* ── APP CARDS ── */
+    .app-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); margin-bottom: 0.875rem; overflow: hidden;
+    }
+    .app-card-head {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.9rem 1.25rem; background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .app-card-name  { font-weight: 700; font-size: 0.95rem; color: var(--dark); }
+    .app-card-email { font-size: 0.78rem; color: var(--muted); margin-top: 0.15rem; }
+    .app-card-body  { padding: 1rem 1.25rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .app-section-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted2); margin-bottom: 0.6rem; }
+    .app-row { font-size: 0.82rem; margin-bottom: 0.3rem; }
+    .app-row .lbl { color: var(--muted); margin-right: 0.3rem; }
+    .skill-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.5rem; }
+    .skill-chip { font-size: 0.7rem; font-weight: 500; background: var(--border2); color: var(--muted); padding: 0.18rem 0.55rem; border-radius: 6px; border: 1px solid var(--border); }
+
+    /* ── STATUS badge ── */
+    .status-applied   { background: var(--blue-light);    color: var(--blue);    border: 1px solid var(--blue-border); }
+    .status-reviewed  { background: var(--warning-light); color: #92400e;        border: 1px solid #fcd34d; }
+    .status-shortlisted{background: var(--brand-light);  color: var(--brand-dark);border:1px solid var(--brand-border);}
+    .status-rejected  { background: var(--danger-light);  color: var(--danger);  border: 1px solid var(--danger-border); }
+
+    /* ── EMPTY STATE ── */
+    .empty {
+      text-align: center; padding: 3rem 2rem;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); color: var(--muted);
+    }
+    .empty-icon { font-size: 2rem; margin-bottom: 0.75rem; opacity: 0.4; }
+    .empty h3 { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 0.4rem; }
+    .empty p  { font-size: 0.85rem; }
+
+    /* ── SYNC STATUS ── */
+    #syncStatus { font-size: 0.82rem; font-weight: 500; color: var(--muted); margin-bottom: 1rem; min-height: 1.2em; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(15,23,42,0.45); backdrop-filter: blur(3px);
+      display: none; align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white); border-radius: var(--radius-lg);
+      width: 100%; max-width: 640px; max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 24px 64px rgba(15,23,42,0.2);
+      animation: slideUp 0.2s ease;
+    }
+    @keyframes slideUp { from { transform: translateY(16px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .modal-head {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; background: var(--white); z-index: 1;
+    }
+    .modal-head h3 { font-size: 1rem; font-weight: 700; color: var(--dark); }
+    .modal-close { background: none; border: none; cursor: pointer; color: var(--muted); padding: 0.25rem; border-radius: 6px; font-size: 1.2rem; line-height: 1; transition: color 0.15s, background 0.15s; }
+    .modal-close:hover { color: var(--text); background: var(--bg); }
+    .modal-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+    .modal-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .modal-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+    .field { display: flex; flex-direction: column; gap: 0.35rem; }
+    .field label { font-size: 0.78rem; font-weight: 600; color: var(--text); }
+    .field input, .field textarea, .field select {
+      padding: 0.6rem 0.85rem; border: 1px solid var(--border); border-radius: 8px;
+      font-family: var(--font); font-size: 0.875rem; color: var(--text); background: var(--white);
+      transition: border-color 0.15s, box-shadow 0.15s; outline: none;
+    }
+    .field input::placeholder, .field textarea::placeholder { color: var(--muted2); }
+    .field input:focus, .field textarea:focus, .field select:focus {
+      border-color: var(--dark); box-shadow: 0 0 0 3px rgba(15,23,42,0.07);
+    }
+    .field textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+    .modal-foot { padding: 1rem 1.5rem; border-top: 1px solid var(--border); display: flex; gap: 0.75rem; justify-content: flex-end; }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 300;
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.85rem 1.25rem;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 10px; box-shadow: 0 8px 32px rgba(15,23,42,0.14);
+      font-size: 0.85rem; font-weight: 500;
+      transform: translateY(20px); opacity: 0;
+      transition: all 0.25s ease; pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .toast.ok  { border-left: 3px solid var(--brand);  }
+    .toast.err { border-left: 3px solid var(--danger); }
+    .toast-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .toast.ok  .toast-dot { background: var(--brand);  }
+    .toast.err .toast-dot { background: var(--danger); }
+  </style>
 </head>
 <body data-protected="1">
-  <nav>
-    <a href="index.html" class="brand">TechJobs. <span style="font-size:0.7rem; font-weight:400; opacity:0.6; margin-left:4px;">ADMIN</span></a>
-    <div class="nav-links">
-      <span id="welcome" style="font-weight:500; font-size:0.875rem;">Welcome, Admin</span>
-      <button class="btn btn-outline" id="logout" style="padding:0.375rem 0.75rem;">Sign out</button>
+
+  <!-- TOP NAV -->
+  <nav class="top-nav">
+    <div class="nav-left">
+      <a href="index.html" class="nav-brand">TechJobs<span>.</span></a>
+      <span class="nav-admin-badge">Admin</span>
+    </div>
+    <div class="nav-right">
+      <span class="nav-welcome">Welcome, <strong id="welcome">Admin</strong></span>
+      <button class="btn-logout" id="logout">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sign out
+      </button>
     </div>
   </nav>
 
-  <div class="container">
+  <div class="layout">
 
-    <!-- Tab Navigation -->
-    <div class="tabs">
-      <button class="tab active" data-tab="vacancies">Vacancies</button>
-      <button class="tab" data-tab="applications">Applications</button>
-      <button class="tab" data-tab="users">Users</button>
-    </div>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <span class="sidebar-label">Management</span>
+      <button class="sidebar-item active" data-tab="vacancies">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        Vacancies
+        <span class="sidebar-count" id="jobCount">—</span>
+      </button>
+      <button class="sidebar-item" data-tab="applications">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Applications
+        <span class="sidebar-count" id="appCount">—</span>
+      </button>
+      <button class="sidebar-item" data-tab="users">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Users
+        <span class="sidebar-count" id="userCount">—</span>
+      </button>
+    </aside>
 
-    <!-- Tab: Vacancies -->
-    <div id="tab-vacancies" class="tab-content active">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
-        <h2 style="margin:0;">Job Vacancies</h2>
-        <div style="display:flex; gap:0.5rem;">
-          <button class="btn" id="syncBtn">Sync from API</button>
-          <button class="btn btn-outline" id="addJobBtn">+ Add Manual Job</button>
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- STAT CARDS (always visible) -->
+      <div class="stat-cards" id="statCards">
+        <div class="stat-card">
+          <div class="stat-card-top">
+            <div>
+              <div class="stat-card-num" id="statJobs">—</div>
+              <div class="stat-card-label">Total Jobs</div>
+            </div>
+            <div class="stat-card-icon" style="background:#f0fdf4; color:#16a34a;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-top">
+            <div>
+              <div class="stat-card-num" id="statApps">—</div>
+              <div class="stat-card-label">Applications</div>
+            </div>
+            <div class="stat-card-icon" style="background:#eff6ff; color:#3b82f6;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-top">
+            <div>
+              <div class="stat-card-num" id="statUsers">—</div>
+              <div class="stat-card-label">Registered Users</div>
+            </div>
+            <div class="stat-card-icon" style="background:#fdf4ff; color:#a855f7;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-top">
+            <div>
+              <div class="stat-card-num" id="statRemote">—</div>
+              <div class="stat-card-label">Remote Jobs</div>
+            </div>
+            <div class="stat-card-icon" style="background:#fff7ed; color:#f59e0b;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+          </div>
         </div>
       </div>
-      <p id="syncStatus" style="margin:0 0 1rem; font-size:0.875rem; color:var(--text-muted);"></p>
-      <div id="jobsList"></div>
-    </div>
 
-    <!-- Tab: Applications -->
-    <div id="tab-applications" class="tab-content">
-      <h2>All Applications</h2>
-      <div id="appsList"></div>
-    </div>
+      <!-- TAB: VACANCIES -->
+      <div id="tab-vacancies" class="tab-content active">
+        <div class="sec-header">
+          <div>
+            <h2>Job Vacancies</h2>
+            <div id="syncStatus"></div>
+          </div>
+          <div class="sec-header-btns">
+            <button class="btn btn-outline" id="syncBtn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              Sync from API
+            </button>
+            <button class="btn btn-primary" id="addJobBtn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Job
+            </button>
+          </div>
+        </div>
+        <div id="jobsList"></div>
+      </div>
 
-    <!-- Tab: Users -->
-    <div id="tab-users" class="tab-content">
-      <h2>Registered Users</h2>
-      <div id="usersList"></div>
-    </div>
+      <!-- TAB: APPLICATIONS -->
+      <div id="tab-applications" class="tab-content">
+        <div class="sec-header"><h2>All Applications</h2></div>
+        <div id="appsList"></div>
+      </div>
 
+      <!-- TAB: USERS -->
+      <div id="tab-users" class="tab-content">
+        <div class="sec-header"><h2>Registered Users</h2></div>
+        <div id="usersList"></div>
+      </div>
+
+    </main>
   </div>
 
-  <!-- Edit Job Modal -->
-  <div class="modal-overlay" id="jobModal" style="display:none;">
+  <!-- JOB MODAL -->
+  <div class="modal-overlay" id="jobModal">
     <div class="modal">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
-        <h3 id="modalTitle" style="margin:0;">Add Job</h3>
-        <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-head">
+        <h3 id="modalTitle">Add Job</h3>
+        <button class="modal-close" id="modalClose">✕</button>
       </div>
-      <form id="jobForm">
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
-          <div class="input-group">
-            <label for="jTitle">Job Title</label>
-            <input id="jTitle" name="title" type="text" required>
+      <div class="modal-body">
+        <form id="jobForm">
+          <div class="modal-grid-2">
+            <div class="field"><label for="jTitle">Job Title *</label><input id="jTitle" name="title" type="text" placeholder="e.g. Backend Developer" required></div>
+            <div class="field"><label for="jCompany">Company *</label><input id="jCompany" name="company" type="text" placeholder="e.g. Stripe" required></div>
           </div>
-          <div class="input-group">
-            <label for="jCompany">Company</label>
-            <input id="jCompany" name="company" type="text" required>
+          <div class="modal-grid-2">
+            <div class="field"><label for="jLocation">Location</label><input id="jLocation" name="location" type="text" placeholder="e.g. Remote – India"></div>
+            <div class="field"><label for="jSalary">Salary</label><input id="jSalary" name="salary" type="text" placeholder="e.g. ₹18–24 LPA"></div>
           </div>
-        </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
-          <div class="input-group">
-            <label for="jLocation">Location</label>
-            <input id="jLocation" name="location" type="text">
+          <div class="field"><label for="jSkills">Required Skills <span style="color:var(--muted); font-weight:400;">(comma separated)</span></label><input id="jSkills" name="requiredSkills" type="text" placeholder="Java, Spring Boot, SQL, Docker"></div>
+          <div class="modal-grid-3">
+            <div class="field"><label for="jExp">Min. Experience (yrs)</label><input id="jExp" name="requiredExperience" type="number" min="0" value="0"></div>
+            <div class="field"><label for="jType">Employment Type</label><input id="jType" name="employmentType" type="text" placeholder="full_time"></div>
+            <div class="field"><label for="jUrl">Application URL</label><input id="jUrl" name="applicationUrl" type="text" placeholder="https://..."></div>
           </div>
-          <div class="input-group">
-            <label for="jSalary">Salary</label>
-            <input id="jSalary" name="salary" type="text">
-          </div>
-        </div>
-        <div class="input-group">
-          <label for="jSkills">Required Skills (comma separated)</label>
-          <input id="jSkills" name="requiredSkills" type="text" placeholder="Java, Spring Boot, SQL">
-        </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;">
-          <div class="input-group">
-            <label for="jExp">Min. Experience (yrs)</label>
-            <input id="jExp" name="requiredExperience" type="number" min="0" value="0">
-          </div>
-          <div class="input-group">
-            <label for="jType">Employment Type</label>
-            <input id="jType" name="employmentType" type="text" placeholder="full_time">
-          </div>
-          <div class="input-group">
-            <label for="jUrl">Application URL</label>
-            <input id="jUrl" name="applicationUrl" type="text">
-          </div>
-        </div>
-        <div class="input-group">
-          <label for="jDesc">Description</label>
-          <textarea id="jDesc" name="description" rows="3" style="width:100%; padding:0.625rem 0.875rem; border:1px solid var(--border); border-radius:var(--radius); font-family:var(--font); font-size:0.875rem; resize:vertical;"></textarea>
-        </div>
-        <input type="hidden" id="jId" name="id">
-        <button class="btn" type="submit" id="jobFormBtn">Save Job</button>
-      </form>
+          <div class="field"><label for="jDesc">Description</label><textarea id="jDesc" name="description" placeholder="Job description..."></textarea></div>
+          <input type="hidden" id="jId" name="id">
+        </form>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-outline" id="modalCancelBtn">Cancel</button>
+        <button class="btn btn-primary" type="submit" form="jobForm" id="jobFormBtn">Save Job</button>
+      </div>
     </div>
   </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"><span class="toast-dot"></span><span id="toastMsg"></span></div>
 
   <script src="js/api.js"></script>
-  <script src="js/admin.js"></script>
+  <script>
+    // ── TOAST ──
+    let toastTimer;
+    function showToast(msg, type = "ok") {
+      const t = document.getElementById("toast");
+      t.className = "toast " + type;
+      document.getElementById("toastMsg").textContent = msg;
+      t.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove("show"), 3500);
+    }
+
+    // ── SIDEBAR TABS ──
+    document.querySelectorAll(".sidebar-item[data-tab]").forEach(item => {
+      item.addEventListener("click", () => {
+        document.querySelectorAll(".sidebar-item").forEach(i => i.classList.remove("active"));
+        document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+        item.classList.add("active");
+        document.getElementById("tab-" + item.dataset.tab).classList.add("active");
+      });
+    });
+
+    // ── INIT ──
+    async function init() {
+      const me = await api("/auth/me");
+      document.getElementById("welcome").textContent = me.name;
+      if (me.role !== "ADMIN") { location.href = "dashboard.html"; return; }
+      const [jobs, users] = await Promise.all([loadJobs(), loadUsers()]);
+      loadApplications();
+    }
+
+    // ── VACANCIES ──
+    async function loadJobs() {
+      const jobs = await api("/admin/jobs");
+      const list = document.getElementById("jobsList");
+      const remoteCount = jobs.filter(j => (j.location || "").toLowerCase().includes("remote")).length;
+
+      document.getElementById("statJobs").textContent = jobs.length;
+      document.getElementById("statRemote").textContent = remoteCount;
+      document.getElementById("jobCount").textContent = jobs.length;
+
+      if (jobs.length === 0) {
+        list.innerHTML = `<div class="empty"><div class="empty-icon">💼</div><h3>No vacancies yet</h3><p>Click "Sync from API" or "Add Job" to get started.</p></div>`;
+        return jobs;
+      }
+
+      list.innerHTML = `
+        <div class="table-wrap">
+          <table>
+            <thead><tr>
+              <th>Title</th><th>Company</th><th>Location</th>
+              <th>Required Skills</th><th>Exp.</th><th>Source</th>
+              <th style="text-align:right">Actions</th>
+            </tr></thead>
+            <tbody>
+              ${jobs.map(j => `
+                <tr>
+                  <td><strong>${esc(j.title)}</strong></td>
+                  <td>${esc(j.company)}</td>
+                  <td style="color:var(--muted); font-size:0.8rem">${esc(j.location || '—')}</td>
+                  <td><span class="td-truncate" title="${esc(j.requiredSkills || '')}">${esc(j.requiredSkills || '—')}</span></td>
+                  <td><span class="badge badge-gray">${j.requiredExperience}+ yr</span></td>
+                  <td><span class="badge ${j.source === 'MANUAL' ? 'badge-amber' : 'badge-blue'}">${esc(j.source || 'MANUAL')}</span></td>
+                  <td style="text-align:right; white-space:nowrap">
+                    <button class="btn btn-edit edit-job" data-id="${j.id}">Edit</button>
+                    <button class="btn btn-del delete-job" data-id="${j.id}" style="margin-left:0.35rem">Delete</button>
+                  </td>
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>`;
+      return jobs;
+    }
+
+    // ── APPLICATIONS ──
+    async function loadApplications() {
+      const list = document.getElementById("appsList");
+      let apps = [];
+      try { apps = await api("/admin/applications/detailed"); } catch (_) {}
+
+      document.getElementById("statApps").textContent = apps.length;
+      document.getElementById("appCount").textContent = apps.length;
+
+      if (apps.length === 0) {
+        list.innerHTML = `<div class="empty"><div class="empty-icon">📋</div><h3>No applications yet</h3><p>Applications will appear here when users apply to jobs.</p></div>`;
+        return;
+      }
+
+      const statusClass = s => {
+        const m = { APPLIED: "status-applied", REVIEWED: "status-reviewed", SHORTLISTED: "status-shortlisted", REJECTED: "status-rejected" };
+        return "badge " + (m[String(s).toUpperCase()] || "badge-gray");
+      };
+
+      list.innerHTML = apps.map(a => `
+        <div class="app-card">
+          <div class="app-card-head">
+            <div>
+              <div class="app-card-name">${esc(a.applicantName)}</div>
+              <div class="app-card-email">${esc(a.applicantEmail)}</div>
+            </div>
+            <div style="text-align:right">
+              <span class="${statusClass(a.status)}">${esc(a.status)}</span>
+              <div style="font-size:0.75rem; color:var(--muted); margin-top:4px">${a.appliedAt ? new Date(a.appliedAt).toLocaleDateString('en-IN', {day:'numeric',month:'short',year:'numeric'}) : '—'}</div>
+            </div>
+          </div>
+          <div class="app-card-body">
+            <div>
+              <div class="app-section-label">Applicant Profile</div>
+              <div class="app-row"><span class="lbl">Target Role:</span>${esc(a.applicantJobTitle || '—')}</div>
+              <div class="app-row"><span class="lbl">Experience:</span>${a.applicantExperience || 0} years</div>
+              <div class="app-row"><span class="lbl">Qualification:</span>${esc(a.applicantQualification || '—')}</div>
+              <div class="app-row"><span class="lbl">Location:</span>${esc(a.applicantLocation || '—')}</div>
+              <div class="skill-chips">${(a.applicantSkills || []).map(s => `<span class="skill-chip">${esc(s)}</span>`).join("") || '<span style="color:var(--muted);font-size:0.78rem">No skills listed</span>'}</div>
+            </div>
+            <div>
+              <div class="app-section-label">Applied For</div>
+              <div class="app-row"><span class="lbl">Job:</span><strong>${esc(a.jobTitle)}</strong></div>
+              <div class="app-row"><span class="lbl">Company:</span>${esc(a.jobCompany || '—')}</div>
+              <div class="app-row"><span class="lbl">Location:</span>${esc(a.jobLocation || '—')}</div>
+              <div class="app-row"><span class="lbl">Min. Exp:</span>${a.jobExperience || 0}+ years</div>
+              <div class="app-row" style="margin-top:0.4rem"><span class="lbl">Required Skills:</span></div>
+              <div style="font-size:0.78rem; color:var(--muted)">${esc(a.jobSkills || 'None specified')}</div>
+            </div>
+          </div>
+        </div>`).join("");
+    }
+
+    // ── USERS ──
+    async function loadUsers() {
+      const users = await api("/admin/users");
+      const list = document.getElementById("usersList");
+
+      document.getElementById("statUsers").textContent = users.length;
+      document.getElementById("userCount").textContent = users.length;
+
+      list.innerHTML = `
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Joined</th></tr></thead>
+            <tbody>
+              ${users.map(u => `
+                <tr>
+                  <td><strong>${esc(u.name)}</strong></td>
+                  <td style="color:var(--muted); font-size:0.82rem">${esc(u.email)}</td>
+                  <td><span class="badge ${u.role === 'ADMIN' ? 'badge-green' : 'badge-gray'}">${esc(u.role)}</span></td>
+                  <td style="color:var(--muted); font-size:0.82rem">${u.createdAt ? new Date(u.createdAt).toLocaleDateString('en-IN', {day:'numeric',month:'short',year:'numeric'}) : '—'}</td>
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        </div>`;
+      return users;
+    }
+
+    // ── MODAL ──
+    const modal = document.getElementById("jobModal");
+    function openModal(job) {
+      document.getElementById("modalTitle").textContent = job ? "Edit Job" : "Add New Job";
+      document.getElementById("jobFormBtn").textContent = job ? "Update Job" : "Save Job";
+      document.getElementById("jobForm").reset();
+      if (job) {
+        document.getElementById("jId").value = job.id;
+        document.getElementById("jTitle").value = job.title || "";
+        document.getElementById("jCompany").value = job.company || "";
+        document.getElementById("jLocation").value = job.location || "";
+        document.getElementById("jSalary").value = job.salary || "";
+        document.getElementById("jSkills").value = job.requiredSkills || "";
+        document.getElementById("jExp").value = job.requiredExperience || 0;
+        document.getElementById("jType").value = job.employmentType || "";
+        document.getElementById("jUrl").value = job.applicationUrl || "";
+        document.getElementById("jDesc").value = job.description || "";
+      } else { document.getElementById("jId").value = ""; }
+      modal.classList.add("open");
+    }
+    function closeModal() { modal.classList.remove("open"); }
+    document.getElementById("modalClose").addEventListener("click", closeModal);
+    document.getElementById("modalCancelBtn").addEventListener("click", closeModal);
+    modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
+
+    document.getElementById("jobForm").addEventListener("submit", async e => {
+      e.preventDefault();
+      const btn = document.getElementById("jobFormBtn");
+      btn.disabled = true; btn.textContent = "Saving...";
+      const id = document.getElementById("jId").value;
+      const body = {
+        title: document.getElementById("jTitle").value,
+        company: document.getElementById("jCompany").value,
+        location: document.getElementById("jLocation").value,
+        salary: document.getElementById("jSalary").value,
+        requiredSkills: document.getElementById("jSkills").value,
+        requiredExperience: Number(document.getElementById("jExp").value),
+        employmentType: document.getElementById("jType").value,
+        applicationUrl: document.getElementById("jUrl").value,
+        description: document.getElementById("jDesc").value
+      };
+      try {
+        if (id) {
+          await api("/admin/jobs/" + id, { method: "PUT", body: JSON.stringify(body) });
+          showToast("Job updated successfully!");
+        } else {
+          await api("/admin/jobs", { method: "POST", body: JSON.stringify(body) });
+          showToast("Job added successfully!");
+        }
+        closeModal(); loadJobs();
+      } catch (err) { showToast(err.message, "err"); }
+      btn.disabled = false; btn.textContent = id ? "Update Job" : "Save Job";
+    });
+
+    // ── EVENT DELEGATION ──
+    document.addEventListener("click", async e => {
+      if (e.target.closest("#logout")) {
+        try { await api("/auth/logout", { method: "POST" }); } catch (_) {}
+        location.href = "index.html"; return;
+      }
+      if (e.target.closest("#syncBtn")) {
+        const btn = document.getElementById("syncBtn");
+        btn.disabled = true; btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="animation:spin 1s linear infinite"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Syncing...`;
+        try {
+          const r = await api("/admin/jobs/sync", { method: "POST" });
+          document.getElementById("syncStatus").textContent = `Last sync: ${r.added} added, ${r.updated} updated`;
+          showToast(`Synced: ${r.added} added, ${r.updated} updated`);
+          loadJobs();
+        } catch (err) { showToast(err.message, "err"); }
+        btn.disabled = false; btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Sync from API`;
+        return;
+      }
+      if (e.target.closest("#addJobBtn")) { openModal(null); return; }
+      if (e.target.closest(".edit-job")) {
+        try {
+          const id = e.target.closest(".edit-job").dataset.id;
+          const jobs = await api("/admin/jobs");
+          const job = jobs.find(j => j.id === Number(id));
+          if (job) openModal(job);
+        } catch (err) { showToast(err.message, "err"); }
+        return;
+      }
+      if (e.target.closest(".delete-job")) {
+        if (!confirm("Delete this job? All associated applications will also be removed.")) return;
+        try {
+          await api("/admin/jobs/" + e.target.closest(".delete-job").dataset.id, { method: "DELETE" });
+          showToast("Job deleted");
+          loadJobs(); loadApplications();
+        } catch (err) { showToast(err.message, "err"); }
+        return;
+      }
+    });
+
+    // Spin animation for sync icon
+    const style = document.createElement("style");
+    style.textContent = "@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }";
+    document.head.appendChild(style);
+
+    init().catch(err => showToast(err.message, "err"));
+  </script>
 </body>
 </html>
