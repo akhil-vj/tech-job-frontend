@@ -1053,6 +1053,46 @@ textarea {
   }
 }
 
+/* Login-specific itjobcell refinements */
+.itjob-wrapper--login {
+  max-width: 960px;
+}
 
+.itjob-grid--login {
+  grid-template-columns: 48% 52%;
+}
 
+.itjob-left-banner--login {
+  padding: 3.5rem 2.5rem;
+}
 
+.itjob-img-box--login {
+  max-width: 330px;
+}
+
+.itjob-right-form--login {
+  padding: 3.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.itjob-checkbox-row {
+  margin: 0.25rem 0 0.5rem 0;
+}
+
+.itjob-checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #475569;
+  cursor: pointer;
+}
+
+.itjob-checkbox-label input[type="checkbox"] {
+  accent-color: #16a34a;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
