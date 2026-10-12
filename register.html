@@ -3,9 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Create your TechJobs profile to discover tech jobs matched to your skills and experience.">
   <link rel="stylesheet" href="css/style.css">
-  <title>Create your profile — TechJobs</title>
+  <title>Job Seeker Registration - TechJobs</title>
 </head>
 <body>
   <nav>
@@ -16,192 +15,111 @@
     </div>
   </nav>
 
-  <div class="auth-container auth-container--wide">
-    <!-- Header -->
+  <div class="auth-container auth-card">
     <div class="auth-header">
-      <h2>Create your profile</h2>
-      <p class="auth-subtitle">Build your profile to discover jobs that match your skills.</p>
+      <h2>Job Seeker Registration</h2>
+      <p class="auth-subtitle">Create your account and find your dream job!</p>
     </div>
 
     <form id="regForm" novalidate>
-      <!-- ─── Section A: Account Information ─── -->
-      <fieldset class="form-section">
-        <legend class="form-section-title">Account Information</legend>
-
-        <div class="form-grid form-grid--2col">
-          <div class="input-group">
-            <label for="name">Full Name <span class="required-mark" aria-hidden="true">*</span></label>
-            <input id="name" name="name" type="text" placeholder="Akhil V J" required autocomplete="name">
-            <div class="field-error" id="name-error" role="alert" aria-live="polite"></div>
-          </div>
-
-          <div class="input-group">
-            <label for="email">Email Address <span class="required-mark" aria-hidden="true">*</span></label>
-            <input id="email" name="email" type="email" placeholder="you@example.com" required autocomplete="email">
-            <div class="field-error" id="email-error" role="alert" aria-live="polite"></div>
-          </div>
+      <!-- 1. Full Name & 2. Age (Two columns on desktop) -->
+      <div class="form-row-2">
+        <div class="input-group">
+          <label for="name">Full Name <span class="req">*</span></label>
+          <input id="name" name="name" type="text" placeholder="Enter your full name" required autocomplete="name">
+          <div class="field-error" id="name-error"></div>
         </div>
 
-        <div class="form-grid form-grid--2col">
-          <div class="input-group">
-            <label for="password">Password <span class="required-mark" aria-hidden="true">*</span></label>
-            <div class="password-wrapper">
-              <input id="password" name="password" type="password" minlength="6" placeholder="At least 6 characters" required autocomplete="new-password">
-              <button type="button" class="password-toggle" aria-label="Show password" data-target="password">
-                <svg class="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                <svg class="eye-off-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
-              </button>
-            </div>
-            <div class="password-strength" id="password-strength" aria-live="polite"></div>
-            <div class="field-error" id="password-error" role="alert" aria-live="polite"></div>
-          </div>
-
-          <div class="input-group">
-            <label for="confirmPassword">Confirm Password <span class="required-mark" aria-hidden="true">*</span></label>
-            <div class="password-wrapper">
-              <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Re-enter your password" required autocomplete="new-password">
-              <button type="button" class="password-toggle" aria-label="Show password" data-target="confirmPassword">
-                <svg class="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                <svg class="eye-off-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
-              </button>
-            </div>
-            <div class="field-error" id="confirmPassword-error" role="alert" aria-live="polite"></div>
-          </div>
+        <div class="input-group">
+          <label for="age">Age <span class="req">*</span></label>
+          <input id="age" name="age" type="number" min="16" max="99" placeholder="e.g. 24" required>
+          <div class="field-error" id="age-error"></div>
         </div>
-      </fieldset>
-
-      <!-- ─── Section B: Professional Profile ─── -->
-      <fieldset class="form-section">
-        <legend class="form-section-title">Professional Profile</legend>
-
-        <!-- Resume mode selector -->
-        <div class="resume-mode" role="radiogroup" aria-label="Profile completion method">
-          <label class="resume-mode-option resume-mode-option--active" id="mode-manual-label">
-            <input type="radio" name="profileMode" value="manual" checked>
-            <div class="resume-mode-content">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-              <div>
-                <strong>Fill in manually</strong>
-                <span>I'll complete my profile step by step</span>
-              </div>
-            </div>
-          </label>
-          <label class="resume-mode-option" id="mode-upload-label">
-            <input type="radio" name="profileMode" value="upload">
-            <div class="resume-mode-content">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 12 15 15"/></svg>
-              <div>
-                <strong>Upload my resume</strong>
-                <span>I already have a CV document</span>
-              </div>
-            </div>
-          </label>
-          <!-- Hidden checkbox to keep backward compatibility with existing JS -->
-          <input type="checkbox" id="hasCv" name="hasCv" hidden aria-hidden="true">
-        </div>
-
-        <!-- Manual profile fields -->
-        <div id="manualProfileSection" class="profile-fields">
-          <div class="form-grid form-grid--2col">
-            <div class="input-group">
-              <label for="jobTitle">Target Job Role <span class="required-mark" aria-hidden="true">*</span></label>
-              <input id="jobTitle" name="jobTitle" type="text" placeholder="e.g. Frontend Developer" required>
-              <div class="field-error" id="jobTitle-error" role="alert" aria-live="polite"></div>
-            </div>
-
-            <div class="input-group">
-              <label for="experienceYears">Experience (Years) <span class="required-mark" aria-hidden="true">*</span></label>
-              <input id="experienceYears" name="experienceYears" type="number" min="0" max="50" value="0" required>
-              <div class="field-error" id="experienceYears-error" role="alert" aria-live="polite"></div>
-            </div>
-          </div>
-
-          <div class="input-group">
-            <label for="skills">Key Skills <span class="required-mark" aria-hidden="true">*</span></label>
-            <input id="skills" name="skills" type="text" placeholder="JavaScript, React, Node.js, CSS" required>
-            <span class="field-hint">Separate skills with commas</span>
-            <div class="field-error" id="skills-error" role="alert" aria-live="polite"></div>
-          </div>
-
-          <div class="form-grid form-grid--2col">
-            <div class="input-group">
-              <label for="qualification">Degree / Qualification</label>
-              <input id="qualification" name="qualification" type="text" placeholder="BSc Computer Science">
-            </div>
-
-            <div class="input-group">
-              <label for="preferredLocation">Preferred Location</label>
-              <input id="preferredLocation" name="preferredLocation" type="text" placeholder="Kochi, Kerala">
-            </div>
-          </div>
-        </div>
-
-        <!-- CV upload area -->
-        <div id="cvUploadSection" class="cv-upload-area" style="display:none">
-          <div class="cv-dropzone" id="cvDropzone">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            <p class="cv-dropzone-text"><strong>Click to upload</strong> or drag and drop</p>
-            <p class="cv-dropzone-hint">PDF, DOC, or DOCX — max 5 MB</p>
-            <input type="file" id="cvFile" name="cvFile" accept=".pdf,.doc,.docx" class="cv-file-input">
-          </div>
-          <div class="cv-file-preview" id="cvFilePreview" style="display:none">
-            <div class="cv-file-info">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-              <span class="cv-file-name" id="cvFileName"></span>
-              <span class="cv-file-size" id="cvFileSize"></span>
-            </div>
-            <button type="button" class="cv-file-remove" id="cvFileRemove" aria-label="Remove selected file">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </button>
-          </div>
-          <div class="field-error" id="cvFile-error" role="alert" aria-live="polite"></div>
-
-          <p class="cv-upload-note">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-            You'll still need to confirm your target role and key skills after uploading.
-          </p>
-
-          <!-- Minimal fields still needed when uploading -->
-          <div class="form-grid form-grid--2col" style="margin-top:1rem">
-            <div class="input-group">
-              <label for="jobTitle">Target Job Role <span class="required-mark" aria-hidden="true">*</span></label>
-              <!-- This is a mirror; the actual #jobTitle input is in manual section.
-                   We'll handle syncing in JS to avoid duplicate IDs. -->
-              <input id="jobTitleUpload" name="jobTitleUpload" type="text" placeholder="e.g. Frontend Developer">
-              <div class="field-error" id="jobTitleUpload-error" role="alert" aria-live="polite"></div>
-            </div>
-
-            <div class="input-group">
-              <label for="skillsUpload">Key Skills <span class="required-mark" aria-hidden="true">*</span></label>
-              <input id="skillsUpload" name="skillsUpload" type="text" placeholder="JavaScript, React, Node.js">
-              <div class="field-error" id="skillsUpload-error" role="alert" aria-live="polite"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Remote preference — always visible -->
-        <div class="checkbox-group" style="margin-top: 0.5rem;">
-          <input id="remote" name="remote" type="checkbox">
-          <label for="remote">I am open to remote work</label>
-        </div>
-      </fieldset>
-
-      <!-- ─── Submit ─── -->
-      <div class="form-actions">
-        <button class="btn btn--register" type="submit" id="regSubmitBtn">
-          Create Account
-        </button>
-        <div id="msg" class="form-message" role="alert" aria-live="polite"></div>
       </div>
 
-      <p class="auth-footer-text">
-        Already have an account? <a href="login.html" class="auth-link">Sign in</a>
-      </p>
+      <!-- 3. Gender & 4. Email Address -->
+      <div class="form-row-2">
+        <div class="input-group">
+          <label for="gender">Gender <span class="req">*</span></label>
+          <select id="gender" name="gender" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Other">Other</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+          <div class="field-error" id="gender-error"></div>
+        </div>
 
-      <p class="auth-privacy-note">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        Your information is securely encrypted and never shared without your consent.
-      </p>
+        <div class="input-group">
+          <label for="email">Email Address <span class="req">*</span></label>
+          <input id="email" name="email" type="email" placeholder="name@example.com" required autocomplete="email">
+          <div class="field-error" id="email-error"></div>
+        </div>
+      </div>
+
+      <!-- 5. Phone Number -->
+      <div class="input-group">
+        <label for="phone">Phone Number <span class="req">*</span></label>
+        <input id="phone" name="phone" type="tel" placeholder="e.g. +91 9876543210" required autocomplete="tel">
+        <div class="field-error" id="phone-error"></div>
+      </div>
+
+      <!-- 6. Highest Qualification -->
+      <div class="input-group">
+        <label for="qualification">Highest Qualification <span class="req">*</span></label>
+        <select id="qualification" name="qualification" required>
+          <option value="" disabled selected>Select Qualification</option>
+          <option value="SSLC">SSLC</option>
+          <option value="Higher Secondary">Higher Secondary</option>
+          <option value="Diploma">Diploma</option>
+          <option value="ITI">ITI</option>
+          <option value="Degree">Degree</option>
+          <option value="BCA / BSc Computer Science">BCA / BSc Computer Science</option>
+          <option value="B.Tech / BE">B.Tech / BE</option>
+          <option value="MCA / MSc">MCA / MSc</option>
+          <option value="Other">Other</option>
+        </select>
+        <div class="field-error" id="qualification-error"></div>
+      </div>
+
+      <!-- 7. Preferred Job Location -->
+      <div class="input-group">
+        <label for="preferredLocation">Preferred Job Location</label>
+        <input id="preferredLocation" name="preferredLocation" type="text" placeholder="e.g. Kochi, Bangalore, Remote">
+        <div class="field-error" id="preferredLocation-error"></div>
+      </div>
+
+      <!-- 8. Skills -->
+      <div class="input-group">
+        <label for="skills">Skills</label>
+        <textarea id="skills" name="skills" rows="3" placeholder="e.g. Java, Python, React, SQL, Problem Solving"></textarea>
+        <div class="field-error" id="skills-error"></div>
+      </div>
+
+      <!-- 9. Work Experience -->
+      <div class="input-group">
+        <label for="workExperience">Work Experience <span class="req">*</span></label>
+        <select id="workExperience" name="workExperience" required>
+          <option value="" disabled selected>Select Experience Level</option>
+          <option value="Fresher">Fresher</option>
+          <option value="Less than 1 year">Less than 1 year</option>
+          <option value="1–3 years">1–3 years</option>
+          <option value="3+ years">3+ years</option>
+        </select>
+        <div class="field-error" id="workExperience-error"></div>
+      </div>
+
+      <!-- 10. Create Password -->
+      <div class="input-group">
+        <label for="password">Create Password <span class="req">*</span></label>
+        <input id="password" name="password" type="password" minlength="6" placeholder="At least 6 characters" required autocomplete="new-password">
+        <div class="field-error" id="password-error"></div>
+      </div>
+
+      <!-- Submit Button -->
+      <button class="btn btn-primary-full" type="submit" id="regSubmitBtn">Create Account</button>
+      <div id="msg" style="display:none;"></div>
     </form>
   </div>
 
