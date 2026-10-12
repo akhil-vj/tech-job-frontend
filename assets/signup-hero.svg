@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 360" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgRegGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="540" height="360" rx="16" fill="url(#bgRegGrad)" />
+
+  <!-- Subtle Career Path Line -->
+  <path d="M 50 280 C 180 280, 220 160, 340 140 C 420 125, 460 70, 500 60" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="6 6" opacity="0.6" />
+
+  <!-- Profile Card Container -->
+  <g transform="translate(60, 40)">
+    <!-- Main Card Body -->
+    <rect width="420" height="270" rx="14" fill="#0f172a" stroke="#334155" stroke-width="1.5" />
+
+    <!-- Profile Header Info -->
+    <g transform="translate(24, 22)">
+      <!-- Avatar Circle -->
+      <circle cx="28" cy="28" r="24" fill="#1e293b" stroke="#38bdf8" stroke-width="2" />
+      <circle cx="28" cy="22" r="8" fill="#94a3b8" />
+      <path d="M16 42 C16 34 22 32 28 32 C34 32 40 34 40 42" fill="#94a3b8" />
+
+      <!-- User Title & Verification Badge -->
+      <text x="68" y="24" fill="#f8fafc" font-size="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700">Developer Profile</text>
+      <text x="68" y="42" fill="#64748b" font-size="12" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Ready for Direct Placement</text>
+      
+      <!-- Verified Pill -->
+      <rect x="290" y="14" width="78" height="24" rx="12" fill="#065f46" />
+      <text x="329" y="30" fill="#a7f3d0" font-size="10.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="600" text-anchor="middle">Active Candidate</text>
+    </g>
+
+    <line x1="24" y1="90" x2="396" y2="90" stroke="#1e293b" stroke-width="1.5" />
+
+    <!-- Skills Badges Section -->
+    <g transform="translate(24, 106)">
+      <text x="0" y="12" fill="#94a3b8" font-size="11" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="600" text-transform="uppercase" letter-spacing="0.05em">Core Stack &amp; Skills</text>
+      
+      <!-- Skill Pills -->
+      <g transform="translate(0, 24)">
+        <!-- Skill 1 -->
+        <rect x="0" y="0" width="86" height="28" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1" />
+        <circle cx="12" cy="14" r="4" fill="#38bdf8" />
+        <text x="24" y="18" fill="#e2e8f0" font-size="11" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="500">React.js</text>
+
+        <!-- Skill 2 -->
+        <rect x="96" y="0" width="80" height="28" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1" />
+        <circle cx="108" cy="14" r="4" fill="#818cf8" />
+        <text x="120" y="18" fill="#e2e8f0" font-size="11" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="500">Node.js</text>
+
+        <!-- Skill 3 -->
+        <rect x="186" y="0" width="92" height="28" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1" />
+        <circle cx="198" cy="14" r="4" fill="#34d399" />
+        <text x="210" y="18" fill="#e2e8f0" font-size="11" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="500">Python/SQL</text>
+
+        <!-- Skill 4 -->
+        <rect x="288" y="0" width="76" height="28" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1" />
+        <circle cx="300" cy="14" r="4" fill="#f59e0b" />
+        <text x="312" y="18" fill="#e2e8f0" font-size="11" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="500">Remote</text>
+      </g>
+    </g>
+
+    <!-- Career Match Status Box -->
+    <g transform="translate(24, 185)">
+      <rect width="372" height="60" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" />
+      <g transform="translate(16, 15)">
+        <!-- Target Icon -->
+        <circle cx="15" cy="15" r="14" fill="#0f172a" />
+        <path d="M15 8 L15 22 M8 15 L22 15" stroke="#38bdf8" stroke-width="2" />
+        <text x="42" y="14" fill="#f1f5f9" font-size="12" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="600">35+ Relevant Openings Available</text>
+        <text x="42" y="28" fill="#64748b" font-size="10.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">Instant interview scheduling with hiring teams</text>
+      </g>
+    </g>
+  </g>
+</svg>
