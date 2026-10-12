@@ -847,25 +847,25 @@ textarea {
 }
 
 .itjob-right-form {
-  padding: 2.25rem 2.5rem;
+  padding: 2rem 2.5rem;
   background: #ffffff;
 }
 
 .itjob-right-form form {
   display: flex;
   flex-direction: column;
-  gap: 0; /* remove flex gap to eliminate double spacing */
+  gap: 0; /* Remove generic flex gap to eliminate double spacing */
 }
 
 .itjob-form-title {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #0f172a;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.2rem;
 }
 
 .itjob-form-subtitle {
-  font-size: 0.85rem;
+  font-size: 0.825rem;
   color: #64748b;
   margin-bottom: 1.15rem;
 }
@@ -873,7 +873,7 @@ textarea {
 .itjob-row {
   display: flex;
   gap: 1rem;
-  margin-bottom: 0.65rem;
+  margin-bottom: 0;
 }
 
 .itjob-col-6 {
@@ -881,13 +881,10 @@ textarea {
 }
 
 .itjob-form-group {
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.75rem;
   display: flex;
   flex-direction: column;
-}
-
-.itjob-row .itjob-form-group {
-  margin-bottom: 0;
+  gap: 0;
 }
 
 .itjob-form-group label {
@@ -906,7 +903,7 @@ textarea {
 
 .itjob-control {
   width: 100%;
-  padding: 0.525rem 0.75rem;
+  padding: 0.5rem 0.75rem;
   border: 1px solid #cbd5e1;
   border-radius: 6px;
   font-size: 0.85rem;
@@ -915,18 +912,9 @@ textarea {
   background: #ffffff;
   transition: all 0.15s ease;
   outline: none;
+  height: 38px;
 }
 
-.itjob-form-group .field-error {
-  min-height: 0;
-  margin-top: 0.15rem;
-  font-size: 0.72rem;
-}
-
-.itjob-form-group .field-error:empty {
-  display: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
 .itjob-control:focus {
   border-color: #16a34a;
   box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
@@ -935,23 +923,26 @@ textarea {
 .itjob-select {
   appearance: auto;
   cursor: pointer;
+  height: 38px;
 }
 
 .itjob-textarea {
   resize: vertical;
   min-height: 52px;
+  height: auto;
+  padding: 0.5rem 0.75rem;
 }
 
-/* Compact radio button row matching itjobcell */
+/* Radio button row matching itjobcell */
 .itjob-radio-bar {
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  padding: 0.42rem 0.75rem;
+  padding: 0 0.75rem;
   border: 1px solid #cbd5e1;
   border-radius: 6px;
   background: #ffffff;
-  min-height: 38px;
+  height: 38px;
 }
 
 .itjob-radio-label {
@@ -962,6 +953,7 @@ textarea {
   color: #334155;
   cursor: pointer;
   margin: 0 !important;
+  font-weight: 400 !important;
 }
 
 .itjob-radio-label input[type="radio"] {
@@ -969,6 +961,14 @@ textarea {
   width: 15px;
   height: 15px;
   cursor: pointer;
+  margin: 0;
+}
+
+/* Field error minimal spacing */
+.itjob-form-group .field-error {
+  min-height: 0;
+  margin-top: 0.15rem;
+  font-size: 0.72rem;
 }
 
 /* Password with toggle */
