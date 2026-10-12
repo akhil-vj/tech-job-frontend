@@ -263,39 +263,88 @@ form .btn { margin-top: 0.25rem; }
 }
 .lbl { color: var(--text-muted); font-size: 0.8rem; }
 
-/* ───── Original TechJobs Job Seeker Registration Demo Styles ───── */
-.auth-card {
-  max-width: 580px;
-  margin: 2.5rem auto;
-  padding: 2.25rem 2.5rem;
+/* ───── Upgraded TechJobs Job Seeker Registration Styles ───── */
+.auth-nav {
+  padding: 1.15rem 2.5rem;
   background: var(--bg);
-  border: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.nav-login-btn {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+  padding: 0.4rem 0.85rem;
   border-radius: var(--radius);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--border);
+  transition: all 0.15s ease;
+}
+
+.nav-login-btn:hover {
+  background: var(--bg-secondary);
+  border-color: #cbd5e1;
+  opacity: 1;
+}
+
+.auth-wrapper {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+  background: radial-gradient(circle at 50% 0%, #f1f5f9 0%, #f8fafc 100%);
+}
+
+.auth-card {
+  max-width: 620px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.75rem 2.5rem;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
 }
 
 .auth-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.25rem;
+}
+
+.auth-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.65rem;
+  background: #f1f5f9;
+  color: #475569;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+  border: 1px solid #e2e8f0;
 }
 
 .auth-header h2 {
-  font-size: 1.5rem;
+  font-size: 1.65rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.35rem;
-  color: var(--text-main);
+  letter-spacing: -0.025em;
+  margin-bottom: 0.4rem;
+  color: #0f172a;
 }
 
 .auth-subtitle {
   margin: 0;
-  font-size: 0.875rem;
-  color: var(--text-muted);
+  font-size: 0.9rem;
+  color: #64748b;
 }
 
 .nav-hint {
   color: var(--text-muted);
-  font-size: 0.875rem;
+  font-size: 0.85rem;
 }
 
 .req {
@@ -307,71 +356,151 @@ form .btn { margin-top: 0.25rem; }
 .form-row-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: 1.15rem;
 }
 
-select, textarea, input[type="tel"] {
+/* Custom form inputs & controls */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+select,
+textarea {
   width: 100%;
-  padding: 0.625rem 0.875rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  padding: 0.68rem 0.9rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
   font-family: var(--font);
   font-size: 0.875rem;
-  background: var(--bg);
-  color: var(--text-main);
-  transition: all 0.15s;
+  background: #ffffff;
+  color: #0f172a;
+  transition: all 0.18s ease;
   outline: none;
 }
 
-select {
-  appearance: auto;
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #0f172a;
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
+}
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
   cursor: pointer;
+  padding-right: 2.25rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
 }
 
 textarea {
   resize: vertical;
-  min-height: 70px;
+  min-height: 80px;
+  line-height: 1.5;
 }
 
-select:focus, textarea:focus, input[type="tel"]:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 1px var(--primary);
+/* Password Toggle Container */
+.password-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
+.password-input-container input {
+  padding-right: 2.75rem;
+}
+
+.pwd-toggle-btn {
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  padding: 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.pwd-toggle-btn:hover {
+  color: #0f172a;
+  background: #f1f5f9;
+}
+
+/* Button & Actions */
 .btn-primary-full {
   width: 100%;
-  padding: 0.75rem 1rem;
-  font-size: 0.9rem;
+  padding: 0.8rem 1.25rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  background: var(--primary);
-  color: #fff;
+  background: #0f172a;
+  color: #ffffff;
   border: none;
-  border-radius: var(--radius);
+  border-radius: 8px;
   cursor: pointer;
-  margin-top: 0.5rem;
-  transition: background 0.15s, transform 0.1s;
+  margin-top: 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-primary-full:hover {
-  background: var(--primary-hover);
+  background: #1e293b;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.18);
+  transform: translateY(-1px);
 }
 
 .btn-primary-full:active {
-  transform: scale(0.99);
+  transform: translateY(0);
 }
 
 .btn-primary-full:disabled {
-  opacity: 0.6;
+  opacity: 0.65;
   cursor: not-allowed;
+  transform: none;
+}
+
+.form-footer-note {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-align: center;
+  margin-top: 1.15rem;
+  line-height: 1.4;
+}
+
+.form-footer-note a {
+  color: #475569;
+  text-decoration: underline;
 }
 
 .field-error {
-  color: var(--error);
+  color: #e11d48;
   font-size: 0.75rem;
   font-weight: 500;
   min-height: 1rem;
   display: none;
-  margin-top: 0.2rem;
+  margin-top: 0.25rem;
 }
 
 .field-error.active {
@@ -379,18 +508,22 @@ select:focus, textarea:focus, input[type="tel"]:focus {
 }
 
 .input-invalid {
-  border-color: var(--error) !important;
-  background-color: #fffafb !important;
+  border-color: #e11d48 !important;
+  background-color: #fff1f2 !important;
 }
 
 .input-invalid:focus {
-  box-shadow: 0 0 0 1px var(--error) !important;
+  box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.15) !important;
 }
 
 @media (max-width: 640px) {
+  .auth-nav {
+    padding: 1rem 1.25rem;
+  }
+
   .auth-card {
-    margin: 1.5rem 1rem;
-    padding: 1.75rem 1.25rem;
+    padding: 2rem 1.25rem;
+    border-radius: 10px;
   }
 
   .form-row-2 {
@@ -402,4 +535,5 @@ select:focus, textarea:focus, input[type="tel"]:focus {
     display: none;
   }
 }
+
 

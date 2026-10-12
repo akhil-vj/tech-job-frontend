@@ -21,7 +21,21 @@ if (reg) {
   const skillsInput = document.getElementById("skills");
   const workExperienceInput = document.getElementById("workExperience");
   const passwordInput = document.getElementById("password");
+  const pwdToggleBtn = document.getElementById("pwdToggleBtn");
+  const eyeIcon = document.getElementById("eyeIcon");
+  const eyeOffIcon = document.getElementById("eyeOffIcon");
   const submitBtn = document.getElementById("regSubmitBtn");
+
+  if (pwdToggleBtn && passwordInput) {
+    pwdToggleBtn.addEventListener("click", () => {
+      const isPwd = passwordInput.type === "password";
+      passwordInput.type = isPwd ? "text" : "password";
+      if (eyeIcon && eyeOffIcon) {
+        eyeIcon.style.display = isPwd ? "none" : "block";
+        eyeOffIcon.style.display = isPwd ? "block" : "none";
+      }
+    });
+  }
 
   const setFieldError = (id, message) => {
     const errEl = document.getElementById(id + "-error");
