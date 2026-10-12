@@ -263,92 +263,257 @@ form .btn { margin-top: 0.25rem; }
 }
 .lbl { color: var(--text-muted); font-size: 0.8rem; }
 
-/* ───── Upgraded TechJobs Job Seeker Registration Styles ───── */
+/* ───── Professional Split-Screen Auth & Showcase Styles ───── */
+.auth-page-body {
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
 .auth-nav {
-  padding: 1.15rem 2.5rem;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
+  padding: 1.1rem 3rem;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 30;
 }
 
 .nav-login-btn {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--primary);
-  padding: 0.4rem 0.85rem;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  transition: all 0.15s ease;
+  color: #0f172a;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  transition: all 0.2s ease;
 }
 
 .nav-login-btn:hover {
-  background: var(--bg-secondary);
-  border-color: #cbd5e1;
+  background: #f1f5f9;
+  border-color: #94a3b8;
   opacity: 1;
 }
 
-.auth-wrapper {
-  min-height: calc(100vh - 70px);
+.auth-layout-container {
+  max-width: 1180px;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem 3rem 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.split-auth-card {
+  display: grid;
+  grid-template-columns: 460px 1fr;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.07), 0 0 1px 1px rgba(15, 23, 42, 0.02);
+  overflow: hidden;
+}
+
+.split-auth-card--register {
+  grid-template-columns: 440px 1fr;
+}
+
+/* Left Showcase Panel */
+.split-auth-visual {
+  background: linear-gradient(165deg, #0f172a 0%, #1e293b 100%);
+  color: #ffffff;
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.split-auth-visual::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  right: -20%;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.visual-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.visual-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  color: #38bdf8;
+  margin-bottom: 1.25rem;
+}
+
+.visual-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  margin-bottom: 0.85rem;
+}
+
+.visual-desc {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #94a3b8;
+  margin-bottom: 1.75rem;
+}
+
+.visual-image-wrapper {
+  margin: 0.5rem 0 1.5rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  background: #090d16;
+}
+
+.visual-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Metric Stats on Login Visual */
+.visual-metrics {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  margin-top: auto;
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-num {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.metric-lbl {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  font-weight: 500;
+  margin-top: 0.1rem;
+}
+
+.metric-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Feature Checklist on Register Visual */
+.feature-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: auto;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+}
+
+.check-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2.5rem 1rem;
-  background: radial-gradient(circle at 50% 0%, #f1f5f9 0%, #f8fafc 100%);
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
-.auth-card {
-  max-width: 620px;
+/* Right Form Panel */
+.split-auth-form-wrap {
+  padding: 3rem 3.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.split-auth-form-wrap--register {
+  padding: 2.75rem 3rem;
+}
+
+.form-inner {
+  max-width: 520px;
   width: 100%;
   margin: 0 auto;
-  padding: 2.75rem 2.5rem;
-  background: #ffffff;
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  border-radius: 12px;
-  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
 }
 
-.auth-header {
-  text-align: center;
-  margin-bottom: 2.25rem;
+.auth-form-header {
+  margin-bottom: 2rem;
 }
 
-.auth-badge {
-  display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 0.25rem 0.65rem;
+.form-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
   background: #f1f5f9;
-  color: #475569;
-  border-radius: 999px;
-  margin-bottom: 0.75rem;
   border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0f172a;
+  margin-bottom: 1rem;
 }
 
-.auth-header h2 {
-  font-size: 1.65rem;
+.auth-form-header h2 {
+  font-size: 1.6rem;
   font-weight: 700;
   letter-spacing: -0.025em;
-  margin-bottom: 0.4rem;
   color: #0f172a;
+  margin-bottom: 0.35rem;
 }
 
 .auth-subtitle {
-  margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: #64748b;
-}
-
-.nav-hint {
-  color: var(--text-muted);
-  font-size: 0.85rem;
+  margin: 0;
 }
 
 .req {
-  color: var(--error);
+  color: #e11d48;
   font-weight: 600;
   margin-left: 0.15rem;
 }
@@ -359,7 +524,7 @@ form .btn { margin-top: 0.25rem; }
   gap: 1.15rem;
 }
 
-/* Custom form inputs & controls */
+/* Control Elements */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -412,7 +577,6 @@ textarea {
   line-height: 1.5;
 }
 
-/* Password Toggle Container */
 .password-input-container {
   position: relative;
   display: flex;
@@ -445,7 +609,7 @@ textarea {
   background: #f1f5f9;
 }
 
-/* Button & Actions */
+/* Primary Submit Buttons */
 .btn-primary-full {
   width: 100%;
   padding: 0.8rem 1.25rem;
@@ -456,7 +620,7 @@ textarea {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  margin-top: 0.65rem;
+  margin-top: 0.75rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -481,11 +645,25 @@ textarea {
   transform: none;
 }
 
+.auth-bottom-switch {
+  margin-top: 1.25rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.auth-bottom-switch a {
+  font-weight: 600;
+  color: #0f172a;
+  margin-left: 0.35rem;
+  text-decoration: underline;
+}
+
 .form-footer-note {
   font-size: 0.75rem;
   color: #94a3b8;
   text-align: center;
-  margin-top: 1.15rem;
+  margin-top: 1rem;
   line-height: 1.4;
 }
 
@@ -516,14 +694,41 @@ textarea {
   box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.15) !important;
 }
 
+/* Responsive Media Queries */
+@media (max-width: 980px) {
+  .split-auth-card,
+  .split-auth-card--register {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+  }
+
+  .split-auth-visual {
+    padding: 2.5rem 2rem;
+  }
+
+  .split-auth-form-wrap,
+  .split-auth-form-wrap--register {
+    padding: 2.5rem 2rem;
+  }
+}
+
 @media (max-width: 640px) {
   .auth-nav {
     padding: 1rem 1.25rem;
   }
 
-  .auth-card {
+  .auth-layout-container {
+    padding: 0 1rem 2rem 1rem;
+    margin: 1.5rem auto;
+  }
+
+  .split-auth-visual {
+    display: none; /* Focus directly on the mobile form */
+  }
+
+  .split-auth-form-wrap,
+  .split-auth-form-wrap--register {
     padding: 2rem 1.25rem;
-    border-radius: 10px;
   }
 
   .form-row-2 {
@@ -535,5 +740,6 @@ textarea {
     display: none;
   }
 }
+
 
 

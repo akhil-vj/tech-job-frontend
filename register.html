@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="css/style.css">
   <title>Job Seeker Registration - TechJobs</title>
 </head>
-<body>
+<body class="auth-page-body">
   <nav class="auth-nav">
     <a href="index.html" class="brand">TechJobs.</a>
     <div class="nav-links">
@@ -15,134 +15,172 @@
     </div>
   </nav>
 
-  <main class="auth-wrapper">
-    <div class="auth-card">
-      <div class="auth-header">
-        <div class="auth-badge">TechJobs Portal</div>
-        <h2>Job Seeker Registration</h2>
-        <p class="auth-subtitle">Create your account and find your dream job!</p>
+  <main class="auth-layout-container">
+    <div class="split-auth-card split-auth-card--register">
+      <!-- Left Visual Showcase Column -->
+      <div class="split-auth-visual split-auth-visual--register">
+        <div class="visual-content">
+          <div class="visual-badge">Join TechJobs Today</div>
+          <h1 class="visual-title">Launch your tech career with personalized matches.</h1>
+          <p class="visual-desc">Create your profile once and get matched with top remote, hybrid, and on-site engineering jobs.</p>
+          <div class="visual-image-wrapper">
+            <img src="assets/signup-hero.png" alt="Candidate Career Growth" class="visual-img">
+          </div>
+          <div class="feature-checklist">
+            <div class="feature-item">
+              <div class="check-circle">✓</div>
+              <span>Automated skills matching algorithm</span>
+            </div>
+            <div class="feature-item">
+              <div class="check-circle">✓</div>
+              <span>Direct application tracking with status alerts</span>
+            </div>
+            <div class="feature-item">
+              <div class="check-circle">✓</div>
+              <span>Verified salary estimates and remote-first opportunities</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <form id="regForm" novalidate>
-        <!-- 1. Full Name & 2. Age (Two columns on desktop) -->
-        <div class="form-row-2">
-          <div class="input-group">
-            <label for="name">Full Name <span class="req">*</span></label>
-            <input id="name" name="name" type="text" placeholder="Enter your full name" required autocomplete="name">
-            <div class="field-error" id="name-error"></div>
-          </div>
-
-          <div class="input-group">
-            <label for="age">Age <span class="req">*</span></label>
-            <input id="age" name="age" type="number" min="16" max="99" placeholder="e.g. 24" required>
-            <div class="field-error" id="age-error"></div>
-          </div>
-        </div>
-
-        <!-- 3. Gender & 4. Email Address -->
-        <div class="form-row-2">
-          <div class="input-group">
-            <label for="gender">Gender <span class="req">*</span></label>
-            <div class="select-wrapper">
-              <select id="gender" name="gender" required>
-                <option value="" disabled selected>Select Gender</option>
-                <option value="Female">Female</option>
-                <option value="Male">Male</option>
-                <option value="Other">Other</option>
-                <option value="Prefer not to say">Prefer not to say</option>
-              </select>
+      <!-- Right Form Column -->
+      <div class="split-auth-form-wrap split-auth-form-wrap--register">
+        <div class="form-inner">
+          <div class="auth-form-header">
+            <div class="form-icon-circle">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
             </div>
-            <div class="field-error" id="gender-error"></div>
+            <h2>Job Seeker Registration</h2>
+            <p class="auth-subtitle">Create your account and find your dream job!</p>
           </div>
 
-          <div class="input-group">
-            <label for="email">Email Address <span class="req">*</span></label>
-            <input id="email" name="email" type="email" placeholder="name@example.com" required autocomplete="email">
-            <div class="field-error" id="email-error"></div>
-          </div>
-        </div>
+          <form id="regForm" novalidate>
+            <!-- 1. Full Name & 2. Age (Two columns on desktop) -->
+            <div class="form-row-2">
+              <div class="input-group">
+                <label for="name">Full Name <span class="req">*</span></label>
+                <input id="name" name="name" type="text" placeholder="Enter your full name" required autocomplete="name">
+                <div class="field-error" id="name-error"></div>
+              </div>
 
-        <!-- 5. Phone Number -->
-        <div class="input-group">
-          <label for="phone">Phone Number <span class="req">*</span></label>
-          <input id="phone" name="phone" type="tel" placeholder="e.g. +91 9876543210" required autocomplete="tel">
-          <div class="field-error" id="phone-error"></div>
-        </div>
+              <div class="input-group">
+                <label for="age">Age <span class="req">*</span></label>
+                <input id="age" name="age" type="number" min="16" max="99" placeholder="e.g. 24" required>
+                <div class="field-error" id="age-error"></div>
+              </div>
+            </div>
 
-        <!-- 6. Highest Qualification -->
-        <div class="input-group">
-          <label for="qualification">Highest Qualification <span class="req">*</span></label>
-          <div class="select-wrapper">
-            <select id="qualification" name="qualification" required>
-              <option value="" disabled selected>Select Qualification</option>
-              <option value="SSLC">SSLC</option>
-              <option value="Higher Secondary">Higher Secondary</option>
-              <option value="Diploma">Diploma</option>
-              <option value="ITI">ITI</option>
-              <option value="Degree">Degree</option>
-              <option value="BCA / BSc Computer Science">BCA / BSc Computer Science</option>
-              <option value="B.Tech / BE">B.Tech / BE</option>
-              <option value="MCA / MSc">MCA / MSc</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <div class="field-error" id="qualification-error"></div>
-        </div>
+            <!-- 3. Gender & 4. Email Address -->
+            <div class="form-row-2">
+              <div class="input-group">
+                <label for="gender">Gender <span class="req">*</span></label>
+                <div class="select-wrapper">
+                  <select id="gender" name="gender" required>
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Other">Other</option>
+                    <option value="Prefer not to say">Prefer not to say</option>
+                  </select>
+                </div>
+                <div class="field-error" id="gender-error"></div>
+              </div>
 
-        <!-- 7. Preferred Job Location -->
-        <div class="input-group">
-          <label for="preferredLocation">Preferred Job Location</label>
-          <input id="preferredLocation" name="preferredLocation" type="text" placeholder="e.g. Kochi, Bangalore, Remote">
-          <div class="field-error" id="preferredLocation-error"></div>
-        </div>
+              <div class="input-group">
+                <label for="email">Email Address <span class="req">*</span></label>
+                <input id="email" name="email" type="email" placeholder="name@example.com" required autocomplete="email">
+                <div class="field-error" id="email-error"></div>
+              </div>
+            </div>
 
-        <!-- 8. Skills -->
-        <div class="input-group">
-          <label for="skills">Skills</label>
-          <textarea id="skills" name="skills" rows="3" placeholder="e.g. Java, Python, React, SQL, Problem Solving"></textarea>
-          <div class="field-error" id="skills-error"></div>
-        </div>
+            <!-- 5. Phone Number -->
+            <div class="input-group">
+              <label for="phone">Phone Number <span class="req">*</span></label>
+              <input id="phone" name="phone" type="tel" placeholder="e.g. +91 9876543210" required autocomplete="tel">
+              <div class="field-error" id="phone-error"></div>
+            </div>
 
-        <!-- 9. Work Experience -->
-        <div class="input-group">
-          <label for="workExperience">Work Experience <span class="req">*</span></label>
-          <div class="select-wrapper">
-            <select id="workExperience" name="workExperience" required>
-              <option value="" disabled selected>Select Experience Level</option>
-              <option value="Fresher">Fresher</option>
-              <option value="Less than 1 year">Less than 1 year</option>
-              <option value="1–3 years">1–3 years</option>
-              <option value="3+ years">3+ years</option>
-            </select>
-          </div>
-          <div class="field-error" id="workExperience-error"></div>
-        </div>
+            <!-- 6. Highest Qualification -->
+            <div class="input-group">
+              <label for="qualification">Highest Qualification <span class="req">*</span></label>
+              <div class="select-wrapper">
+                <select id="qualification" name="qualification" required>
+                  <option value="" disabled selected>Select Qualification</option>
+                  <option value="SSLC">SSLC</option>
+                  <option value="Higher Secondary">Higher Secondary</option>
+                  <option value="Diploma">Diploma</option>
+                  <option value="ITI">ITI</option>
+                  <option value="Degree">Degree</option>
+                  <option value="BCA / BSc Computer Science">BCA / BSc Computer Science</option>
+                  <option value="B.Tech / BE">B.Tech / BE</option>
+                  <option value="MCA / MSc">MCA / MSc</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="field-error" id="qualification-error"></div>
+            </div>
 
-        <!-- 10. Create Password -->
-        <div class="input-group">
-          <label for="password">Create Password <span class="req">*</span></label>
-          <div class="password-input-container">
-            <input id="password" name="password" type="password" minlength="6" placeholder="At least 6 characters" required autocomplete="new-password">
-            <button type="button" class="pwd-toggle-btn" id="pwdToggleBtn" aria-label="Toggle password visibility">
-              <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-              <svg id="eyeOffIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            <!-- 7. Preferred Job Location -->
+            <div class="input-group">
+              <label for="preferredLocation">Preferred Job Location</label>
+              <input id="preferredLocation" name="preferredLocation" type="text" placeholder="e.g. Kochi, Bangalore, Remote">
+              <div class="field-error" id="preferredLocation-error"></div>
+            </div>
+
+            <!-- 8. Skills -->
+            <div class="input-group">
+              <label for="skills">Skills</label>
+              <textarea id="skills" name="skills" rows="3" placeholder="e.g. Java, Python, React, SQL, Problem Solving"></textarea>
+              <div class="field-error" id="skills-error"></div>
+            </div>
+
+            <!-- 9. Work Experience -->
+            <div class="input-group">
+              <label for="workExperience">Work Experience <span class="req">*</span></label>
+              <div class="select-wrapper">
+                <select id="workExperience" name="workExperience" required>
+                  <option value="" disabled selected>Select Experience Level</option>
+                  <option value="Fresher">Fresher</option>
+                  <option value="Less than 1 year">Less than 1 year</option>
+                  <option value="1–3 years">1–3 years</option>
+                  <option value="3+ years">3+ years</option>
+                </select>
+              </div>
+              <div class="field-error" id="workExperience-error"></div>
+            </div>
+
+            <!-- 10. Create Password -->
+            <div class="input-group">
+              <label for="password">Create Password <span class="req">*</span></label>
+              <div class="password-input-container">
+                <input id="password" name="password" type="password" minlength="6" placeholder="At least 6 characters" required autocomplete="new-password">
+                <button type="button" class="pwd-toggle-btn" id="pwdToggleBtn" aria-label="Toggle password visibility">
+                  <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg id="eyeOffIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                </button>
+              </div>
+              <div class="field-error" id="password-error"></div>
+            </div>
+
+            <!-- Submit Button -->
+            <button class="btn btn-primary-full" type="submit" id="regSubmitBtn">
+              <span>Create Account</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </button>
-          </div>
-          <div class="field-error" id="password-error"></div>
+
+            <div id="msg" style="display:none;"></div>
+
+            <div class="auth-bottom-switch">
+              <span>Already have an account?</span>
+              <a href="login.html">Sign in here</a>
+            </div>
+
+            <p class="form-footer-note">
+              By registering, you agree to TechJobs <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a>.
+            </p>
+          </form>
         </div>
-
-        <!-- Submit Button -->
-        <button class="btn btn-primary-full" type="submit" id="regSubmitBtn">
-          <span>Create Account</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </button>
-
-        <div id="msg" style="display:none;"></div>
-
-        <p class="form-footer-note">
-          By signing up, you agree to TechJobs <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a>.
-        </p>
-      </form>
+      </div>
     </div>
   </main>
 
