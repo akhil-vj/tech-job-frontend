@@ -741,5 +741,318 @@ textarea {
   }
 }
 
+/* ───── itjobcell.com Custom Layout Styles ───── */
+.itjob-body {
+  background: #f4f6f9;
+  min-height: 100vh;
+}
+
+.itjob-nav {
+  background: #ffffff;
+  border-bottom: 1px solid #e1e7ec;
+  padding: 0.85rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.itjob-nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.itjob-brand {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1a202c;
+  letter-spacing: -0.02em;
+}
+
+.itjob-brand span {
+  color: #16a34a; /* vibrant green dot */
+}
+
+.itjob-nav-btn {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #16a34a;
+  border: 1.5px solid #16a34a;
+  padding: 0.45rem 1.15rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.itjob-nav-btn:hover {
+  background: #16a34a;
+  color: #ffffff;
+  opacity: 1;
+}
+
+.itjob-wrapper {
+  max-width: 1140px;
+  margin: 2.5rem auto;
+  padding: 0 1rem;
+}
+
+.itjob-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+.itjob-grid {
+  display: grid;
+  grid-template-columns: 46% 54%;
+}
+
+.itjob-left-banner {
+  background: #eef2f6;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-right: 1px solid #e2e8f0;
+}
+
+.itjob-img-box {
+  max-width: 380px;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.itjob-reg-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.itjob-banner-copy h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.itjob-banner-copy p {
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.itjob-right-form {
+  padding: 2.75rem 3rem;
+  background: #ffffff;
+}
+
+.itjob-form-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.35rem;
+}
+
+.itjob-form-subtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 1.75rem;
+}
+
+.itjob-row {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.itjob-col-6 {
+  flex: 1;
+}
+
+.itjob-form-group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.itjob-form-group label {
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.35rem;
+}
+
+.itjob-form-group label sup {
+  color: #dc2626;
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+.itjob-control {
+  width: 100%;
+  padding: 0.625rem 0.85rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-family: var(--font);
+  color: #1e293b;
+  background: #ffffff;
+  transition: all 0.15s ease;
+  outline: none;
+}
+
+.itjob-control:focus {
+  border-color: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
+}
+
+.itjob-select {
+  appearance: auto;
+  cursor: pointer;
+}
+
+.itjob-textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* Radio button row matching itjobcell */
+.itjob-radio-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #ffffff;
+  min-height: 42px;
+}
+
+.itjob-radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: #334155;
+  cursor: pointer;
+  margin: 0 !important;
+}
+
+.itjob-radio-label input[type="radio"] {
+  accent-color: #16a34a;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Password with toggle */
+.itjob-password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.itjob-password-wrapper input {
+  padding-right: 2.75rem;
+}
+
+.itjob-pwd-toggle {
+  position: absolute;
+  right: 0.6rem;
+  background: none;
+  border: none;
+  padding: 0.35rem;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.itjob-pwd-toggle:hover {
+  color: #1e293b;
+}
+
+/* Action button */
+.itjob-action-wrap {
+  margin-top: 1.5rem;
+}
+
+.itjob-submit-btn {
+  width: 100%;
+  padding: 0.8rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: #16a34a; /* itjobcell green */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.25);
+  transition: all 0.2s ease;
+}
+
+.itjob-submit-btn:hover {
+  background: #15803d;
+  box-shadow: 0 6px 16px rgba(22, 163, 74, 0.35);
+  transform: translateY(-1px);
+}
+
+.itjob-submit-btn:active {
+  transform: translateY(0);
+}
+
+.itjob-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.itjob-footer-text {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.itjob-footer-text a {
+  color: #16a34a;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .itjob-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .itjob-left-banner {
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .itjob-right-form {
+    padding: 2.25rem 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .itjob-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .itjob-wrapper {
+    margin: 1.25rem auto;
+  }
+}
+
+
 
 
